@@ -1,8 +1,9 @@
 <template>
   <div>
-    <h1>{{ msg }}</h1>
     <div class="w-50 p-3 mb-1 mx-auto">
-      <b-form-input v-model="text" placeholder="Search for for Pokemon" id="searchbar">
+      <b-form-input v-on:keyup.enter="onSubmit" placeholder="Search for for Pokemon" id="searchbar"
+                    :value="value"
+                    @input="onQueryInput">
       </b-form-input>
     </div>
   </div>
@@ -10,11 +11,21 @@
 
 <script>
 export default {
-  name: 'Searchbar',
   props: {
-    msg: String
+    value: String
+  },
+
+  methods:{
+    onsubmit(event) {
+      event.preventDefault();
+      this.$emit('submit');
+    },
+    onQueryInput(event){
+      this.$emit('input', event)
+    }
   }
 }
+
 </script>
 
 <style>

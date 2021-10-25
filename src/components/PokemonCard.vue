@@ -14,7 +14,7 @@
             <b-card-title>Pokemon</b-card-title>
             <b-card-sub-title class="mb-2">No.####</b-card-sub-title>
           </b-card-body>
-          <b-card-footer>This is a footer</b-card-footer>
+          <b-card-footer footer-class="cardFooter">This is a footer</b-card-footer>
         </b-card>
 
         <b-card id="cards"
@@ -28,7 +28,7 @@
             <b-card-title>Pokemon</b-card-title>
             <b-card-sub-title class="mb-2">No.####</b-card-sub-title>
           </b-card-body>
-          <b-card-footer>This is a footer</b-card-footer>
+          <b-card-footer footer-class="cardFooter">This is a footer</b-card-footer>
         </b-card>
 
         <b-card id="cards"
@@ -42,7 +42,7 @@
             <b-card-title>Pokemon</b-card-title>
             <b-card-sub-title class="mb-2">No.####</b-card-sub-title>
           </b-card-body>
-          <b-card-footer>This is a footer</b-card-footer>
+          <b-card-footer footer-class="cardFooter">This is a footer</b-card-footer>
         </b-card>
 
         <b-card id="cards"
@@ -56,7 +56,7 @@
             <b-card-title>Pokemon</b-card-title>
             <b-card-sub-title class="mb-2">No.####</b-card-sub-title>
           </b-card-body>
-          <b-card-footer>This is a footer</b-card-footer>
+          <b-card-footer footer-class="cardFooter">This is a footer</b-card-footer>
         </b-card>
       </b-card-group>
 
@@ -72,7 +72,7 @@
             <b-card-title>Pokemon</b-card-title>
             <b-card-sub-title class="mb-2">No.####</b-card-sub-title>
           </b-card-body>
-          <b-card-footer>This is a footer</b-card-footer>
+          <b-card-footer footer-class="cardFooter">This is a footer</b-card-footer>
         </b-card>
 
         <b-card id="cards"
@@ -86,7 +86,7 @@
             <b-card-title>Pokemon</b-card-title>
             <b-card-sub-title class="mb-2">No.####</b-card-sub-title>
           </b-card-body>
-          <b-card-footer>This is a footer</b-card-footer>
+          <b-card-footer footer-class="cardFooter">This is a footer</b-card-footer>
         </b-card>
 
         <b-card id="cards"
@@ -100,7 +100,7 @@
             <b-card-title>Pokemon</b-card-title>
             <b-card-sub-title class="mb-2">No.####</b-card-sub-title>
           </b-card-body>
-          <b-card-footer>This is a footer</b-card-footer>
+          <b-card-footer footer-class="cardFooter">This is a footer</b-card-footer>
         </b-card>
 
         <b-card id="cards"
@@ -114,7 +114,9 @@
             <b-card-title>Pokemon</b-card-title>
             <b-card-sub-title class="mb-2">No.####</b-card-sub-title>
           </b-card-body>
-          <b-card-footer>This is a footer</b-card-footer>
+          <b-card-footer class="cardFooter">
+            <span class="ability">Poison</span>
+          <span class="ability">Poison</span></b-card-footer>
         </b-card>
       </b-card-group>
     </b-container>
@@ -147,11 +149,19 @@ export default {
 }
 
 .card {
-  border: 0!important;
+  border: 0 !important;
   background-color: #19191B !important;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 30px !important;
 }
 
+.ability {
+  padding: 0.2rem 0.4rem !important;
+  font-size: 75% !important;
+  color: #fff !important;
+  background-color: #212529 !important;
+  border-radius: 0.2rem !important;
+  margin-left: 1.5%;
+}
 </style>
