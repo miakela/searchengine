@@ -8,6 +8,11 @@ Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
+Vue.filter('getInfo', function (value) {
+  if (value === name) return value
+
+})
+
 new Vue({
   render: h => h(App),
 }).$mount('#app')

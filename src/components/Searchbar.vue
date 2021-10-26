@@ -16,7 +16,7 @@ export default {
   },
 
   methods:{
-    onsubmit(event) {
+    onSubmit(event) {
       event.preventDefault();
       this.$emit('submit');
     },

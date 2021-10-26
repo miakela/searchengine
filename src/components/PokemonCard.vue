@@ -8,115 +8,14 @@
                 img-alt="Pokemonname"
                 img-top
                 header-tag="header"
-                footer-tag="footer">
+                footer-tag="footer"
+                value>
 
           <b-card-body class="card-body">
-            <b-card-title>Pokemon</b-card-title>
-            <b-card-sub-title class="mb-2">No.####</b-card-sub-title>
+            <b-card-title>{{ content }}</b-card-title>
+            <b-card-sub-title class="mb-2">No.000{{ number }}</b-card-sub-title>
           </b-card-body>
-          <b-card-footer footer-class="cardFooter">This is a footer</b-card-footer>
-        </b-card>
-
-        <b-card id="cards"
-                style="max-width: 20rem"
-                img-src="https://www.pokewiki.de/images/thumb/9/96/Sugimori_001.png/250px-Sugimori_001.png"
-                img-alt="Pokemonname"
-                img-top
-                header-tag="header"
-                footer-tag="footer">
-          <b-card-body class="card-body">
-            <b-card-title>Pokemon</b-card-title>
-            <b-card-sub-title class="mb-2">No.####</b-card-sub-title>
-          </b-card-body>
-          <b-card-footer footer-class="cardFooter">This is a footer</b-card-footer>
-        </b-card>
-
-        <b-card id="cards"
-                style="max-width: 20rem"
-                img-src="https://www.pokewiki.de/images/thumb/9/96/Sugimori_001.png/250px-Sugimori_001.png"
-                img-alt="Pokemonname"
-                img-top
-                header-tag="header"
-                footer-tag="footer">
-          <b-card-body class="card-body">
-            <b-card-title>Pokemon</b-card-title>
-            <b-card-sub-title class="mb-2">No.####</b-card-sub-title>
-          </b-card-body>
-          <b-card-footer footer-class="cardFooter">This is a footer</b-card-footer>
-        </b-card>
-
-        <b-card id="cards"
-                style="max-width: 20rem"
-                img-src="https://www.pokewiki.de/images/thumb/9/96/Sugimori_001.png/250px-Sugimori_001.png"
-                img-alt="Pokemonname"
-                img-top
-                header-tag="header"
-                footer-tag="footer">
-          <b-card-body class="card-body">
-            <b-card-title>Pokemon</b-card-title>
-            <b-card-sub-title class="mb-2">No.####</b-card-sub-title>
-          </b-card-body>
-          <b-card-footer footer-class="cardFooter">This is a footer</b-card-footer>
-        </b-card>
-      </b-card-group>
-
-      <b-card-group deck class="deck">
-        <b-card id="cards"
-                style="max-width: 20rem"
-                img-src="https://www.pokewiki.de/images/thumb/9/96/Sugimori_001.png/250px-Sugimori_001.png"
-                img-alt="Pokemonname"
-                img-top
-                header-tag="header"
-                footer-tag="footer">
-          <b-card-body class="card-body">
-            <b-card-title>Pokemon</b-card-title>
-            <b-card-sub-title class="mb-2">No.####</b-card-sub-title>
-          </b-card-body>
-          <b-card-footer footer-class="cardFooter">This is a footer</b-card-footer>
-        </b-card>
-
-        <b-card id="cards"
-                style="max-width: 20rem"
-                img-src="https://www.pokewiki.de/images/thumb/9/96/Sugimori_001.png/250px-Sugimori_001.png"
-                img-alt="Pokemonname"
-                img-top
-                header-tag="header"
-                footer-tag="footer">
-          <b-card-body class="card-body">
-            <b-card-title>Pokemon</b-card-title>
-            <b-card-sub-title class="mb-2">No.####</b-card-sub-title>
-          </b-card-body>
-          <b-card-footer footer-class="cardFooter">This is a footer</b-card-footer>
-        </b-card>
-
-        <b-card id="cards"
-                style="max-width: 20rem"
-                img-src="https://www.pokewiki.de/images/thumb/9/96/Sugimori_001.png/250px-Sugimori_001.png"
-                img-alt="Pokemonname"
-                img-top
-                header-tag="header"
-                footer-tag="footer">
-          <b-card-body class="card-body">
-            <b-card-title>Pokemon</b-card-title>
-            <b-card-sub-title class="mb-2">No.####</b-card-sub-title>
-          </b-card-body>
-          <b-card-footer footer-class="cardFooter">This is a footer</b-card-footer>
-        </b-card>
-
-        <b-card id="cards"
-                style="max-width: 20rem"
-                img-src="https://www.pokewiki.de/images/thumb/9/96/Sugimori_001.png/250px-Sugimori_001.png"
-                img-alt="Pokemonname"
-                img-top
-                header-tag="header"
-                footer-tag="footer">
-          <b-card-body class="card-body">
-            <b-card-title>Pokemon</b-card-title>
-            <b-card-sub-title class="mb-2">No.####</b-card-sub-title>
-          </b-card-body>
-          <b-card-footer class="cardFooter">
-            <span class="ability">Poison</span>
-          <span class="ability">Poison</span></b-card-footer>
+          <b-card-footer footer-class="ability">This is a footer</b-card-footer>
         </b-card>
       </b-card-group>
     </b-container>
@@ -125,7 +24,11 @@
 
 <script>
 export default {
-  name: "PokemonCard"
+  name: "PokemonCard",
+  props: {
+    content: undefined,
+    number: Number,
+  }
 }
 </script>
 
@@ -162,6 +65,8 @@ export default {
   color: #fff !important;
   background-color: #212529 !important;
   border-radius: 0.2rem !important;
-  margin-left: 1.5%;
+  margin-left: 15px;
+  margin-bottom: 15px;
 }
+
 </style>
