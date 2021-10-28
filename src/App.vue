@@ -57,7 +57,8 @@ export default {
   methods: {
     onSubmit() {
       let url;
-      if ((this.searchQuery) === String) {
+      if (isNaN(this.searchQuery)) {
+        console.log(this.searchQuery)
         url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchName/'
       } else {
         url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchID/'
