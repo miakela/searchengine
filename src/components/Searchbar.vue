@@ -1,12 +1,13 @@
 <template>
-  <div>
     <div class="w-50 p-3 mb-1 mx-auto">
-      <b-form-input v-on:keyup.enter="onSubmit" placeholder="Search for for Pokemon" id="searchbar"
+      <b-form-input v-on:keyup.enter="onSubmit"
+                    placeholder="Search for for Pokemon"
+                    id="searchbar"
                     :value="value"
                     @input="onQueryInput">
+
       </b-form-input>
     </div>
-  </div>
 </template>
 
 <script>
