@@ -2,11 +2,11 @@
   <div id="app">
     <img id="logo" alt="Vue logo" src="./assets/logo.png">
     <h1>Pokedex</h1>
-    <SearchBar v-model="searchQuery" @submit="onSubmit" />
+    <SearchBar v-model="searchQuery" @submit="onSubmit"/>
     <b-container>
-        <PokemonCard :number=searchResults.pokedex_number :content=searchResults.name />
+      <PokemonCard :number=searchResults.pokedex_number :content=searchResults.name />
+        <Pokemon v-bind:imgsrc="resolveImgSource" :result=searchResults :pokedexNumb=getNumber />
     </b-container>
-    <Pokemon :pokemonname="searchResults.name" :number="searchResults.pokedex_number" v-bind:imgsrc="resolveImgSource"/>
   </div>
 </template>
 
@@ -17,24 +17,21 @@ import Pokemon from "@/components/Pokemon";
 
 import axios from 'axios';
 
-
 export default {
   name: 'App',
 
   components: {
-    SearchBar,
-    Pokemon,
-    PokemonCard,
+    SearchBar: SearchBar,
+    Pokemon: Pokemon,
+    PokemonCard: PokemonCard,
   },
-
 
   data() {
     return {
       searchQuery: 'Bulbasaur',
-      searchResults: []
+      searchResults: [],
     }
   },
-
 
   computed: {
 
@@ -51,6 +48,17 @@ export default {
         imgurl = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png"
       }
       return imgurl
+    },
+    getNumber: function (pokedexNum) {
+      if (this.searchResults.pokedex_number < 10) {
+        pokedexNum = "00" + this.searchResults.pokedex_number
+      } else if (this.searchResults.pokedex_number < 100) {
+        pokedexNum = "0" + this.searchResults.pokedex_number
+      } else {
+        pokedexNum = this.searchResults.pokedex_number
+      }
+      console.log(pokedexNum)
+      return pokedexNum
     }
   },
 
@@ -58,7 +66,6 @@ export default {
     onSubmit() {
       let url;
       if (isNaN(this.searchQuery)) {
-        console.log(this.searchQuery)
         url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchName/'
       } else {
         url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchID/'
@@ -77,10 +84,8 @@ export default {
             console.log(error);
             this.searchResults = []
           })
-    }
+    },
   },
-
-
 }
 
 </script>

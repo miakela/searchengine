@@ -1,6 +1,6 @@
 <template>
   <div class="w-100 p-3 mb-1 text-light card">
-    <b-container fluid="lg">
+<!--    <b-container fluid="lg">
       <b-card-group deck class="deck">
         <b-card id="cards"
                 style="max-width: 20rem"
@@ -18,7 +18,7 @@
           <b-card-footer footer-class="ability">This is a footer</b-card-footer>
         </b-card>
       </b-card-group>
-    </b-container>
+    </b-container>-->
   </div>
 </template>
 
@@ -48,7 +48,7 @@ export default {
 
 .card-body {
   text-align: left;
-  padding-bottom: 0 !important;
+  /*padding-bottom: 0 !important;*/
 }
 
 .card {

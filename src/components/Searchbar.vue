@@ -5,7 +5,6 @@
                     id="searchbar"
                     :value="value"
                     @input="onQueryInput">
-
       </b-form-input>
     </div>
 </template>
