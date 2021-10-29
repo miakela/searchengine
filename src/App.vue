@@ -5,6 +5,7 @@
     <SearchBar v-model="searchQuery" @submit="onSubmit"/>
     <b-container>
       <PokemonCard v-if="searchResults.length === 0" :number=searchResults.pokedex_number :content=searchResults.name />
+      <PokemonCard :searchresults=searchResults />
       <Pokemon v-if="searchResults.length !== 0" v-bind:imgsrc="resolveImgSource" :result=searchResults :pokedexNumb=getNumber />
     </b-container>
   </div>
@@ -58,16 +59,34 @@ export default {
         pokedexNum = "" + this.searchResults.pokedex_number + ""
       }
       return pokedexNum
-    }
+    },
   },
 
   methods: {
+    onload() {
+      let url;
+      url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchAll/'
+      axios.get(url)
+          .then((response) => {
+            if (response.data === null) {
+              this.searchResults = [];
+            } else {
+              this.searchResults = response.data;
+              console.log(this.searchResults)
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            this.searchResults = []
+          })
+    },
+
     onSubmit() {
       let url;
       if (isNaN(this.searchQuery)) {
         url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchName/'
       }
-      else{
+      else {
         url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchID/'
       }
       axios.get(url + this.searchQuery)

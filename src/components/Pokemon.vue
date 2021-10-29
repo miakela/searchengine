@@ -1,13 +1,13 @@
 <template>
     <div>
       <h1> {{ result.name }}
-        <b-badge variant="dark">№{{ pokedexNumb }}</b-badge>
+        <b-badge variant="dark">№ {{ pokedexNumb }}</b-badge>
       </h1>
       <div class="card-big">
         <b-card-group columns>
           <!-- img -->
-          <b-card no-body class="overflow-hidden">
-            <b-row no-gutters>
+          <b-card no-body class="overflow-hidden" style="width:75%">
+            <b-row no-gutters id="pokeimg">
               <b-card-img :src="imgsrc" class="img"/>
             </b-row>
           </b-card>
@@ -38,86 +38,79 @@
             <b-row no-gutters v-if="result.percentage_male">
               <b-col><b>Percentage Male: </b></b-col>
               <b-col>
-                <b-progress class="w-75 mb-2" :max="100" show-value>
-                  <b-progress-bar variant="secondary" :value="result.percentage_male"></b-progress-bar>
-                </b-progress>
+                <b-progress class="w-75 mb-2" :max="100" show-value variant="secondary" :value="result.percentage_male" />
               </b-col>
             </b-row>
+
             <b-row no-gutters v-if="result.percentage_male">
               <b-col><b>Percentage Female: </b></b-col>
               <b-col>
-                <b-progress class="w-75 mb-2" :max="100" show-value>
-                  <b-progress-bar variant="secondary" :value="100-result.percentage_male"></b-progress-bar>
-                </b-progress>
+                <b-progress class="w-75 mb-2" :max="100" show-value variant="secondary" :value="100-result.percentage_male"/>
+              </b-col>
+            </b-row>
+
+            <b-row no-gutters v-if="result.percentage_male">
+              <b-col><b>Weaknesses: </b></b-col>
+              <b-col>
+                <div v-for="attr in result" :key="attr.message">
+                  {{attr.message}}
+                </div>
               </b-col>
             </b-row>
 
           </b-card>
         </b-card-group>
 
+
+        <!-- info-card -->
         <b-card-group>
-          <!-- info-card -->
-          <b-card bg-variant="light" text-variant="dark">
+          <b-card bg-variant="dark" text-variant="light">
             <b-row no-gutters>
               <b-col><b>HP: </b></b-col>
               <b-col>
-                <b-progress  :max="255" show-value>
-                  <b-progress-bar variant="secondary" :value="result.hp"></b-progress-bar>
-                </b-progress>
+                <b-progress :max="255" show-value variant="success" :value="result.hp"/>
               </b-col>
             </b-row>
 
             <b-row no-gutters>
             <b-col><b>Attack: </b></b-col>
               <b-col>
-                <b-progress :max="190" show-value>
-                  <b-progress-bar variant="secondary" :value="result.attack"></b-progress-bar>
-                </b-progress>
+                <b-progress :max="190" show-value variant="danger" :value="result.attack"/>
               </b-col>
             </b-row>
 
             <b-row no-gutters>
               <b-col><b>Defense: </b></b-col>
               <b-col>
-                <b-progress :max="230" show-value>
-                  <b-progress-bar variant="secondary" :value="result.defense"></b-progress-bar>
-                </b-progress>
+                  <b-progress :max="230" show-value variant="primary" :value="result.defense"/>
               </b-col>
             </b-row>
 
             <b-row no-gutters>
               <b-col><b>Special Attack: </b></b-col>
               <b-col>
-                <b-progress :max="173" show-value>
-                  <b-progress-bar variant="secondary" :value="result.sp_attack"></b-progress-bar>
-                </b-progress>
+                <b-progress :max="173" show-value variant="danger" :value="result.sp_attack"/>
               </b-col>
             </b-row>
 
             <b-row no-gutters>
               <b-col><b>Special Defense: </b></b-col>
               <b-col>
-                <b-progress :max="230" show-value>
-                  <b-progress-bar variant="secondary" :value="result.sp_defense"></b-progress-bar>
-                </b-progress>
+                <b-progress :max="230" show-value variant="primary" :value="result.sp_defense"/>
               </b-col>
             </b-row>
 
             <b-row no-gutters>
               <b-col><b>Speed: </b></b-col>
               <b-col>
-                <b-progress :max="200" show-value>
-                  <b-progress-bar variant="secondary" :value="result.speed"></b-progress-bar>
-                </b-progress>
+                <b-progress :max="200" show-value variant="warning" :value="result.speed"/>
               </b-col>
             </b-row>
 
             <b-row no-gutters>
               <b-col><b>Total Points: </b></b-col>
               <b-col>
-                <b-progress :max="720" show-value>
-                  <b-progress-bar variant="secondary" :value="result.total_points"></b-progress-bar>
-                </b-progress>
+                <b-progress :max="720" show-value variant="info" :value="result.total_points"/>
               </b-col>
             </b-row>
 
@@ -142,7 +135,7 @@ export default {
 
 <style>
 #card1 {
-  margin-top: 20px !important;
+  margin-top: 15px !important;
 }
 
 .img {
@@ -161,8 +154,9 @@ export default {
 }
 
 h4 {
-  margin-bottom: 0rem !important;
+  margin-bottom: 0 !important;
 }
+
 
 .col {
   margin-bottom: 0 !important;
@@ -186,7 +180,7 @@ h4 {
 }
 
 .Fairy {
-  background-color: #EAC1C7 !important;
+  background-color: #e58191 !important;
 }
 
 .Fire {
@@ -198,11 +192,11 @@ h4 {
 }
 
 .Ground {
-  background-color: #BF9E5B !important;
+  background-color: #8e7437 !important;
 }
 
 .Normal {
-  background-color: #CDC7B7 !important;
+  background-color: #958a8a !important;
 }
 
 .Psychic {
@@ -219,6 +213,7 @@ h4 {
 
 .Electric {
   background-color: #F7EC00 !important;
+  color: #171f2b !important;
 }
 
 .Fighting {
@@ -226,7 +221,8 @@ h4 {
 }
 
 .Flying {
-  background-color: #BFDCF7 !important;
+  background-color: #a6cef6 !important;
+  color: #171f2b !important;
 }
 
 .Ice {
@@ -245,8 +241,8 @@ h4 {
   background-color: #4CA6CD !important;
 }
 
-
 .badge {
   font-weight: 500 !important;
 }
+
 </style>

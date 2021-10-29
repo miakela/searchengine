@@ -13,7 +13,7 @@
 
           <b-card-body class="card-body">
             <b-card-title>{{ content }}</b-card-title>
-            <b-card-sub-title class="mb-2">No.000{{ number }}</b-card-sub-title>
+            <b-card-sub-title class="mb-2">No.000 {{ number }}</b-card-sub-title>
           </b-card-body>
           <b-card-footer footer-class="ability">This is a footer</b-card-footer>
         </b-card>
