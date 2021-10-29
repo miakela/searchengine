@@ -4,8 +4,8 @@
     <h1>Pokedex</h1>
     <SearchBar v-model="searchQuery" @submit="onSubmit"/>
     <b-container>
-      <PokemonCard :number=searchResults.pokedex_number :content=searchResults.name />
-        <Pokemon v-bind:imgsrc="resolveImgSource" :result=searchResults :pokedexNumb=getNumber />
+      <PokemonCard v-if="searchResults.length === 0" :number=searchResults.pokedex_number :content=searchResults.name />
+      <Pokemon v-if="searchResults.length !== 0" v-bind:imgsrc="resolveImgSource" :result=searchResults :pokedexNumb=getNumber />
     </b-container>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
 
   data() {
     return {
-      searchQuery: 'Bulbasaur',
+      searchQuery: '',
       searchResults: [],
     }
   },
@@ -55,9 +55,8 @@ export default {
       } else if (this.searchResults.pokedex_number < 100) {
         pokedexNum = "0" + this.searchResults.pokedex_number
       } else {
-        pokedexNum = this.searchResults.pokedex_number
+        pokedexNum = "" + this.searchResults.pokedex_number + ""
       }
-      console.log(pokedexNum)
       return pokedexNum
     }
   },
@@ -67,7 +66,8 @@ export default {
       let url;
       if (isNaN(this.searchQuery)) {
         url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchName/'
-      } else {
+      }
+      else{
         url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchID/'
       }
       axios.get(url + this.searchQuery)
@@ -77,7 +77,6 @@ export default {
             } else {
               this.searchResults = response.data;
               console.log(this.searchResults)
-              console.log((this.searchQuery).type)
             }
           })
           .catch((error) => {
