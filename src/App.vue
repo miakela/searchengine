@@ -4,13 +4,13 @@
     <h1>Pokedex</h1>
     <div class="options">
       <SearchBar v-model="searchQuery" @submit="onSubmit"/>
-      <Options  v-model="jason" @submit="onClick"/>
+      <Options v-model="jason" @submit="onClick"/>
     </div>
     <PokemonCard v-if="searchResults.length === 0" :content=searchResultsAll />
     <Pokemon v-if="searchResults.length !== 0" v-bind:imgsrc="resolveImgSource" :result=searchResults
              :pokedexNumb=getNumber />
-    <!--      <PokemonCard v-for="(value, propertyname, index) in searchResults" v-bind:key="index" :name=propertyname.name
-                       :number=propertyname.pokedex_number :type=propertyname.type_1 /> -->
+    <!--    <PokemonCard v-for="(value, propertyname, index) in searchResults" v-bind:key="index" :name=propertyname.name
+                           :number=propertyname.pokedex_number :type=propertyname.type_1 />-->
   </div>
 </template>
 
@@ -72,26 +72,26 @@ export default {
 
   methods: {
 
-/*    onClick(jason) {
-      console.log(jason)
+    /*    onClick(jason) {
+          console.log(jason)
 
-    /*    onload() {
-      let url;
-      url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchAll/'
-      axios.get(url)
-          .then((response) => {
-            if (response.data === null) {
-              this.searchResultsAll = [];
-            } else {
-              this.searchResultsAll = response.data;
-              console.log(this.searchResultsAll)
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-            this.searchResultsAll = []
-          })
-    },*/
+        /*    onload() {
+          let url;
+          url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchAll/'
+          axios.get(url)
+              .then((response) => {
+                if (response.data === null) {
+                  this.searchResultsAll = [];
+                } else {
+                  this.searchResultsAll = response.data;
+                  console.log(this.searchResultsAll)
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+                this.searchResultsAll = []
+              })
+        },*/
 
     /*    searchResultsAll() {
         var url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchAll/'
@@ -126,17 +126,24 @@ export default {
             this.searchResults = []
           })
     },
-    onClick() { //jason
+    onClick(jason) {
       // Send filter to backend
-      let test = {"generation": 1,"sort": ["name","ASC"]}
-      axios.get(
-          'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/filterPokemon/' + JSON.stringify(test) )
+      axios({
+        method: 'post',
+        url: 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/filterPokemon',
+        data: {
+          jason
+        },
+        headers: {'Content-Type': 'application/json'},
+      })
           .then((response) => {
             if (response.data === null) {
               this.searchResults = [];
             } else {
               this.searchResults = response.data;
               console.log(response.data)
+              const object = Object.entries(jason)
+              console.log(Object.fromEntries(object))
             }
           })
           .catch((error) => {

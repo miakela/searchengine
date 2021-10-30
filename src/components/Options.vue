@@ -236,7 +236,7 @@ export default {
 
   data() {
     return {
-      jason: {},
+    jason: {},
 
       selectedHeight: null,
       selectedWeight: null,
