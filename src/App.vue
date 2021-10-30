@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <img id="logo" alt="Vue logo" src="./assets/logo.png">
+      <a href="http://localhost:8081/"><img id="logo" alt="Vue logo" src="./assets/logo.png"></a>
       <h1>Pokedex</h1>
     <div class="options">
     <SearchBar v-model="searchQuery" @submit="onSubmit"/>

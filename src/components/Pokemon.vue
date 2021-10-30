@@ -168,7 +168,7 @@ h4 {
 }
 
 .Grass {
-  background-color: #009400 !important;
+  background-color: #078207 !important;
 }
 
 .Bug {
@@ -180,15 +180,15 @@ h4 {
 }
 
 .Fairy {
-  background-color: #e58191 !important;
+  background-color: #c65f6d !important;
 }
 
 .Fire {
-  background-color: #ED5812 !important;
+  background-color: #d2581c !important;
 }
 
 .Ghost {
-  background-color: #362C35 !important;
+  background-color: #2d182b !important;
 }
 
 .Ground {
@@ -197,22 +197,23 @@ h4 {
 
 .Normal {
   background-color: #958a8a !important;
+  color: #090f15 !important;
 }
 
 .Psychic {
-  background-color: #F7138F !important;
+  background-color: #c92c76 !important;
 }
 
 .Steel {
-  background-color: #757575 !important;
+  background-color: #5a5a5a !important;
 }
 
 .Dark {
-  background-color: #18242E !important;
+  background-color: #0b1d26 !important;
 }
 
 .Electric {
-  background-color: #F7EC00 !important;
+  background-color: #efc213 !important;
   color: #171f2b !important;
 }
 
@@ -227,18 +228,19 @@ h4 {
 
 .Ice {
   background-color: #E9F2FF !important;
+  color: #171f2b !important;
 }
 
 .Poison {
   background-color: #8401B8 !important;
 }
 
-.rock {
+.Rock {
   background-color: #5A4D41 !important;
 }
 
-.water {
-  background-color: #4CA6CD !important;
+.Water {
+  background-color: #3677a0 !important;
 }
 
 .badge {
