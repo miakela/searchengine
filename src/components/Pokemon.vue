@@ -3,7 +3,7 @@
       <h1> {{ result.name }}
         <b-badge variant="dark">№ {{ pokedexNumb }}</b-badge>
       </h1>
-      <div class="card-big">
+      <div class="card-big w-50 p-3 mb-1 mx-auto">
         <b-card-group columns>
           <!-- img -->
           <b-card no-body class="overflow-hidden" style="width:75%">

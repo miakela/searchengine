@@ -1,15 +1,16 @@
 <template>
   <div id="app">
-      <a href="http://localhost:8081/"><img id="logo" alt="Vue logo" src="./assets/logo.png"></a>
-      <h1>Pokedex</h1>
+    <a href="http://localhost:8081/"><img id="logo" alt="Vue logo" src="./assets/logo.png"></a>
+    <h1>Pokedex</h1>
     <div class="options">
-    <SearchBar v-model="searchQuery" @submit="onSubmit"/>
-    <Options @click="onClick"/>
+      <SearchBar v-model="searchQuery" @submit="onSubmit"/>
+      <Options  v-model="jason" @submit="onClick"/>
     </div>
-      <PokemonCard v-if="searchResults.length === 0" :content=searchResultsAll />
-      <Pokemon v-if="searchResults.length !== 0" v-bind:imgsrc="resolveImgSource" :result=searchResults :pokedexNumb=getNumber />
-      <PokemonCard v-for="(value, propertyname, index) in searchResults" v-bind:key="index" :name=propertyname.name
-                   :number=propertyname.pokedex_number :type=propertyname.type_1 />
+    <PokemonCard v-if="searchResults.length === 0" :content=searchResultsAll />
+    <Pokemon v-if="searchResults.length !== 0" v-bind:imgsrc="resolveImgSource" :result=searchResults
+             :pokedexNumb=getNumber />
+    <!--      <PokemonCard v-for="(value, propertyname, index) in searchResults" v-bind:key="index" :name=propertyname.name
+                       :number=propertyname.pokedex_number :type=propertyname.type_1 /> -->
   </div>
 </template>
 
@@ -35,7 +36,8 @@ export default {
     return {
       searchQuery: '',
       searchResults: [],
-      searchResultsAll: []
+      searchResultsAll: [],
+      jason: {},
     }
   },
 
@@ -69,7 +71,11 @@ export default {
   },
 
   methods: {
-/*    onload() {
+
+/*    onClick(jason) {
+      console.log(jason)
+
+    /*    onload() {
       let url;
       url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchAll/'
       axios.get(url)
@@ -87,7 +93,7 @@ export default {
           })
     },*/
 
-/*    searchResultsAll() {
+    /*    searchResultsAll() {
         var url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchAll/'
         axios.get(url)
           .then(response => {
@@ -100,11 +106,9 @@ export default {
       let url;
       if (isNaN(this.searchQuery)) {
         url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchName/'
-      }
-      else if (this.searchQuery === ''){
+      } else if (this.searchQuery === '') {
         url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchAll/'
-      }
-      else {
+      } else {
         url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchID/'
       }
       axios.get(url + this.searchQuery)
@@ -122,17 +126,16 @@ export default {
             this.searchResults = []
           })
     },
-/*    onClick() {
-      let url = "http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/filterPokemom/";
-      axios.get(url,
-      params: {
-        filer: this.filter
-      }).then((response) => {
+    onClick() { //jason
+      // Send filter to backend
+      let test = {"generation": 1,"sort": ["name","ASC"]}
+      axios.get(
+          'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/filterPokemon/' + JSON.stringify(test) )
+          .then((response) => {
             if (response.data === null) {
               this.searchResults = [];
             } else {
               this.searchResults = response.data;
-              console.log(this.searchResults)
               console.log(response.data)
             }
           })
@@ -140,8 +143,8 @@ export default {
             console.log(error);
             this.searchResults = []
           })
-    },*/
-  },
+    },
+  }
 }
 
 </script>
@@ -171,12 +174,14 @@ html {
 #logo {
   width: 40%;
 }
+
 body::-webkit-scrollbar {
   display: block;
   background-color: #19191B;
   width: 0.5rem;
 
 }
+
 body::-webkit-scrollbar-thumb {
   background: #29292F;
   border-radius: 10px;

@@ -1,13 +1,6 @@
 <template>
   <div>
-
-    <div>SelectedTBug: {{ selectedTBug }}</div>
-    <div>SelectedWBug: {{ selectedWBug }}</div>
-    <div>Selected: {{ selected }}</div>
-    <div>selectedAbility: {{ selectedAbility }}</div>
-    <div>height: {{ height }}</div>
-
-
+    <div>json: {{ jason }}</div>
     <template>
       <div class="accordion w-50 p-3 mb-1 mx-auto" role="tablist">
         <b-card no-body class="mb-1">
@@ -28,74 +21,74 @@
                   <b-card-group>
                     <b-list-group>
                       <b-list-group-item align="left"><span class="round Bug">Bug</span>
-                        <b-form-checkbox v-model="selectedTBug" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Bug" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedWBug" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_bug" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
                       <b-list-group-item align="left"><span class="round Dragon">Dragon</span>
-                        <b-form-checkbox v-model="selectedTDragon" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Dragon" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedWDragon" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_dragon" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
                       <b-list-group-item align="left"><span class="round Fairy">Fairy</span>
-                        <b-form-checkbox v-model="selectedTFairy" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Fairy" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedWFairy" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_fairy" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
                       <b-list-group-item align="left"><span class="round Fire">Fire</span>
-                        <b-form-checkbox v-model="selectedTFire" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Fire" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedWFire" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_fire" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
                       <b-list-group-item align="left"><span class="round Ghost">Ghost</span>
-                        <b-form-checkbox v-model="selectedTGhost" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Ghost" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedWGhost" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_ghost" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
                       <b-list-group-item align="left"><span class="round Ground">Ground</span>
-                        <b-form-checkbox v-model="selectedTGround" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Ground" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedWGround" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_ground" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
                       <b-list-group-item align="left"><span class="round Normal">Normal</span>
-                        <b-form-checkbox v-model="selectedTNormal" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Normal" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedWNormal" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_normal" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
                       <b-list-group-item align="left"><span class="round Psychic">Psychic</span>
-                        <b-form-checkbox v-model="selectedTPsychic" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Psychic" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedWPsychic" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_psychic" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
                       <b-list-group-item align="left"><span class="round Steel">Steel</span>
-                        <b-form-checkbox v-model="selectedTSteel" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Steel" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedWSteel" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_steel" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
@@ -103,74 +96,74 @@
                     </b-list-group>
                     <b-list-group>
                       <b-list-group-item align="left"><span class="round Dark">Dark</span>
-                        <b-form-checkbox v-model="selectedTDark" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Dark" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedWDark" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_dark" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
                       <b-list-group-item align="left"><span class="round Electric">Electric</span>
-                        <b-form-checkbox v-model="selectedTElectric" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Electric" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedWElectric" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_electric" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
                       <b-list-group-item align="left"><span class="round Fighting">Fighting</span>
-                        <b-form-checkbox v-model="selectedTFighting" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Fighting" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedWFighting" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_fighting" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
                       <b-list-group-item align="left"><span class="round Flying">Flying</span>
-                        <b-form-checkbox v-model="selectedTFlying" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Flying" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedW" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_flying" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
                       <b-list-group-item align="left"><span class="round Grass">Grass</span>
-                        <b-form-checkbox v-model="selectedTGrass" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Grass" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedWGrass" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_grass" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
                       <b-list-group-item align="left"><span class="round Ice">Ice</span>
-                        <b-form-checkbox v-model="selectedTIce" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Ice" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedWIce" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_ice" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
                       <b-list-group-item align="left"><span class="round Poison">Poison</span>
-                        <b-form-checkbox v-model="selectedTPoison" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Poison" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedWPoison" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_poison" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
                       <b-list-group-item align="left"><span class="round Rock">Rock</span>
-                        <b-form-checkbox v-model="selectedTRock" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Rock" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedWRock" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_rock" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
                       <b-list-group-item align="left"><span class="round Water">Water</span>
-                        <b-form-checkbox v-model="selectedTWater" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedType" value="Water" button button-variant="outline-light">
                           T
                         </b-form-checkbox>
-                        <b-form-checkbox v-model="selectedWWater" button button-variant="outline-light">
+                        <b-form-checkbox v-model="selectedWeakness" value="against_water" button button-variant="outline-light">
                           W
                         </b-form-checkbox>
                       </b-list-group-item>
@@ -192,12 +185,14 @@
                     <b-card-title align="left" class="title">Height</b-card-title>
                     <div>
                       <b-form-checkbox-group
-                          v-model="height"
-                          :options="heights"
+                          v-model="selectedHeight"
+                          :options="height"
                           buttons
                           button-variant="dark"
                           size="lg"
                           name="buttons-2"
+                          value-field="item"
+                          text-field="name"
                       ></b-form-checkbox-group>
                     </div>
                   </b-form-group>
@@ -206,20 +201,24 @@
                     <b-card-title align="left" class="title">Weight</b-card-title>
                     <div>
                       <b-form-checkbox-group
-                          v-model="selected"
-                          :options="weights"
+                          v-model="selectedWeight"
+                          :options="weight"
                           buttons
                           button-variant="dark"
                           size="lg"
                           name="buttons-2"
+                          value-field="item"
+                          text-field="name"
                       ></b-form-checkbox-group>
                     </div>
                   </b-form-group>
-                  <div class="searchButton">
-                    <b-button v-on="onClick">Search
+                  <b-form-group>
+                  <b-button-group class="searchButton">
+                    <b-button v-on:click="onClick">Search
                       <b-icon icon="search" size="sm" class="iconSearch"></b-icon>
                     </b-button>
-                  </div>
+                  </b-button-group>
+                    </b-form-group>
                 </div>
               </b-card-group>
             </b-card-group>
@@ -234,48 +233,26 @@
 <script>
 export default {
   name: "Options",
+
   data() {
     return {
+      jason: {},
 
-      selected: [],
-      "height": [],
-      selectedAbility: [],
-      selectedTBug: [],
-      selectedWBug: [],
-      selectedTDragon: [],
-      selectedWDragon: [],
-      selectedTFairy: [],
-      selectedWFairy: [],
-      selectedTFire: [],
-      selectedWFire: [],
-      selectedTGhost: [],
-      selectedWGhost: [],
-      selectedTGround: [],
-      selectedWGround: [],
-      selectedTNormal: [],
-      selectedWNormal: [],
-      selectedTPsychic: [],
-      selectedWPsychic: [],
-      selectedTSteel: [],
-      selectedWSteel: [],
-      selectedTDark: [],
-      selectedWDark: [],
-      selectedTElectric: [],
-      selectedWElectric: [],
-      selectedTFighting: [],
-      selectedWFighting: [],
-      selectedTFlying: [],
-      selectedW: [],
-      selectedTGrass: [],
-      selectedWGrass: [],
-      selectedTIce: [],
-      selectedWIce: [],
-      selectedTPoison: [],
-      selectedWPoison: [],
-      selectedTRock: [],
-      selectedWRock: [],
-      selectedTWater: [],
-      selectedWWater: [],
+      selectedHeight: null,
+      selectedWeight: null,
+      height: [
+        {item: 1, name: 'small'},
+        {item: 2, name: 'medium'},
+        {item: 3, name: 'large',},
+      ],
+      weight: [
+        {item: 1, name: 'light'},
+        {item: 2, name: 'medium'},
+        {item: 3, name: 'heavy',},
+      ],
+      selectedType: [],
+      selectedWeakness: [],
+      selectedAbility: null,
       Abilities: [
         "Adaptability",
         "Aerilate",
@@ -490,17 +467,27 @@ export default {
         "Wonder Guard",
         "Wonder Skin"
       ],
-      heights: ["small", "medium", "large"],
-      weights: ["light", "normal", "heavy"],
-      json: {
-
-      },
     }
   },
   methods: {
     onClick(event) {
       event.preventDefault();
-      this.$emit('submit');
+      if (this.selectedType.length !== 0) {
+        this.jason['type_1'] = this.selectedType;
+      }
+      if (this.selectedAbility != null) {
+        this.jason['ability'] = this.selectedAbility;
+      }
+      if (this.selectedWeakness.length  !== 0) {
+        this.jason['weakness'] = this.selectedWeakness;
+      }
+      if (this.selectedWeight!= null) {
+        this.jason['weight'] = this.selectedWeight;
+      }
+      if (this.selectedHeight!= null) {
+        this.jason['height'] = this.selectedHeight;
+      }
+      this.$emit('submit', this.jason);
     },
   }
 }

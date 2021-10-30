@@ -28,7 +28,8 @@ export default {
     content: undefined,
     name: String,
     number: Number,
-    type: String,
+    type_1: String,
+    type_2: String,
     searchResults: [],
   },
 }
