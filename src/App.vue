@@ -1,13 +1,15 @@
 <template>
   <div id="app">
-    <img id="logo" alt="Vue logo" src="./assets/logo.png">
-    <h1>Pokedex</h1>
+      <img id="logo" alt="Vue logo" src="./assets/logo.png">
+      <h1>Pokedex</h1>
+    <div class="options">
     <SearchBar v-model="searchQuery" @submit="onSubmit"/>
-    <b-container>
-      <PokemonCard v-if="searchResults.length === 0" :number=searchResults.pokedex_number :content=searchResults.name />
-      <PokemonCard :searchresults=searchResults />
+      <Options></Options>
+    </div>
+      <PokemonCard v-if="searchResults.length === 0" :content=searchResultsAll />
       <Pokemon v-if="searchResults.length !== 0" v-bind:imgsrc="resolveImgSource" :result=searchResults :pokedexNumb=getNumber />
-    </b-container>
+      <PokemonCard v-for="(value, propertyname, index) in searchResults" v-bind:key="index" :name=propertyname.name
+                   :number=propertyname.pokedex_number :type=propertyname.type_1 />
   </div>
 </template>
 
@@ -15,6 +17,7 @@
 import SearchBar from './components/Searchbar.vue';
 import PokemonCard from "@/components/PokemonCard";
 import Pokemon from "@/components/Pokemon";
+import Options from "@/components/Options";
 
 import axios from 'axios';
 
@@ -25,14 +28,17 @@ export default {
     SearchBar: SearchBar,
     Pokemon: Pokemon,
     PokemonCard: PokemonCard,
+    Options: Options,
   },
 
   data() {
     return {
       searchQuery: '',
       searchResults: [],
+      searchResultsAll: []
     }
   },
+
 
   computed: {
 
@@ -63,28 +69,40 @@ export default {
   },
 
   methods: {
-    onload() {
+/*    onload() {
       let url;
       url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchAll/'
       axios.get(url)
           .then((response) => {
             if (response.data === null) {
-              this.searchResults = [];
+              this.searchResultsAll = [];
             } else {
-              this.searchResults = response.data;
-              console.log(this.searchResults)
+              this.searchResultsAll = response.data;
+              console.log(this.searchResultsAll)
             }
           })
           .catch((error) => {
             console.log(error);
-            this.searchResults = []
+            this.searchResultsAll = []
           })
-    },
+    },*/
+
+/*    searchResultsAll() {
+        var url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchAll/'
+        axios.get(url)
+          .then(response => {
+          })
+          .catch(error => {
+          })
+    },*/
 
     onSubmit() {
       let url;
       if (isNaN(this.searchQuery)) {
         url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchName/'
+      }
+      else if (this.searchQuery === ''){
+        url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchAll/'
       }
       else {
         url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchID/'
@@ -96,6 +114,7 @@ export default {
             } else {
               this.searchResults = response.data;
               console.log(this.searchResults)
+              console.log(response.data)
             }
           })
           .catch((error) => {
@@ -113,18 +132,35 @@ html {
   background-color: #19191B;
 }
 
+.options {
+  background-color: #19191B;
+}
+
+.bottom {
+}
+
 #app {
   font-family: "Open Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #eeeeee;
-  margin-top: 60px;
+  padding-top: 60px;
   background-color: #19191B;
 }
 
 #logo {
   width: 40%;
+}
+body::-webkit-scrollbar {
+  display: block;
+  background-color: #19191B;
+  width: 0.5rem;
+
+}
+body::-webkit-scrollbar-thumb {
+  background: #29292F;
+  border-radius: 10px;
 }
 
 </style>

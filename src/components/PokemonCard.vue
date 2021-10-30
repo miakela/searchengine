@@ -10,12 +10,11 @@
                 header-tag="header"
                 footer-tag="footer"
                 value>
-
           <b-card-body class="card-body">
-            <b-card-title>{{ content }}</b-card-title>
+            <b-card-title>{{ name }}</b-card-title>
             <b-card-sub-title class="mb-2">No.000 {{ number }}</b-card-sub-title>
           </b-card-body>
-          <b-card-footer footer-class="ability">This is a footer</b-card-footer>
+          <b-card-footer>Type: <b-badge class="Grass">{{ type }}</b-badge></b-card-footer>
         </b-card>
       </b-card-group>
     </b-container>
@@ -27,8 +26,11 @@ export default {
   name: "PokemonCard",
   props: {
     content: undefined,
+    name: String,
     number: Number,
-  }
+    type: String,
+    searchResults: [],
+  },
 }
 </script>
 
