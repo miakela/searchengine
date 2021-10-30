@@ -1,7 +1,12 @@
 <template>
   <div>
-    <div>Selected: <strong>{{ selected }}</strong></div>
-    <div>selectedTDark: <strong>{{ selectedTDark }}</strong></div>
+
+    <div>SelectedTBug: {{ selectedTBug }}</div>
+    <div>SelectedWBug: {{ selectedWBug }}</div>
+    <div>Selected: {{ selected }}</div>
+    <div>selectedAbility: {{ selectedAbility }}</div>
+    <div>height: {{ height }}</div>
+
 
     <template>
       <div class="accordion w-50 p-3 mb-1 mx-auto" role="tablist">
@@ -179,21 +184,21 @@
                 <div>
                   <b-card-group>
                     <b-card-title align="left" class="title">Ability</b-card-title>
-                    <b-form-select v-model="selected" :options="Abilities"
+                    <b-form-select v-model="selectedAbility" :options="Abilities"
                                    style="background-color: #29292F; color:white "></b-form-select>
                   </b-card-group>
 
                   <b-form-group>
                     <b-card-title align="left" class="title">Height</b-card-title>
                     <div>
-                        <b-form-checkbox-group
-                            v-model="selected"
-                            :options="heights"
-                            buttons
-                            button-variant="dark"
-                            size="lg"
-                            name="buttons-2"
-                        ></b-form-checkbox-group>
+                      <b-form-checkbox-group
+                          v-model="height"
+                          :options="heights"
+                          buttons
+                          button-variant="dark"
+                          size="lg"
+                          name="buttons-2"
+                      ></b-form-checkbox-group>
                     </div>
                   </b-form-group>
 
@@ -211,17 +216,17 @@
                     </div>
                   </b-form-group>
                   <div class="searchButton">
-                    <b-button>Search<b-icon icon="search" size="sm" class="iconSearch"></b-icon></b-button>
+                    <b-button v-on="onClick">Search
+                      <b-icon icon="search" size="sm" class="iconSearch"></b-icon>
+                    </b-button>
                   </div>
                 </div>
               </b-card-group>
-
             </b-card-group>
           </b-collapse>
         </b-card>
       </div>
     </template>
-
   </div>
 </template>
 
@@ -231,7 +236,10 @@ export default {
   name: "Options",
   data() {
     return {
+
       selected: [],
+      "height": [],
+      selectedAbility: [],
       selectedTBug: [],
       selectedWBug: [],
       selectedTDragon: [],
@@ -484,12 +492,16 @@ export default {
       ],
       heights: ["small", "medium", "large"],
       weights: ["light", "normal", "heavy"],
+      json: {
+
+      },
     }
   },
   methods: {
-    onClick() {
-      this.$refs.selection.show(true)
-    }
+    onClick(event) {
+      event.preventDefault();
+      this.$emit('submit');
+    },
   }
 }
 
@@ -591,12 +603,14 @@ export default {
 .custom-select {
   padding: 0.375rem 160px 0.375rem 0.75rem !important;
 }
+
 .searchButton {
-  margin-top: 130px!important;
-  margin-left: 280px!important;
+  margin-top: 130px !important;
+  margin-left: 280px !important;
 }
+
 .iconSearch {
-  margin-left:16px;
+  margin-left: 16px;
 }
 
 </style>

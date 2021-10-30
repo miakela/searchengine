@@ -4,7 +4,7 @@
       <h1>Pokedex</h1>
     <div class="options">
     <SearchBar v-model="searchQuery" @submit="onSubmit"/>
-      <Options></Options>
+    <Options @click="onClick"/>
     </div>
       <PokemonCard v-if="searchResults.length === 0" :content=searchResultsAll />
       <Pokemon v-if="searchResults.length !== 0" v-bind:imgsrc="resolveImgSource" :result=searchResults :pokedexNumb=getNumber />
@@ -122,6 +122,25 @@ export default {
             this.searchResults = []
           })
     },
+/*    onClick() {
+      let url = "http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/filterPokemom/";
+      axios.get(url,
+      params: {
+        filer: this.filter
+      }).then((response) => {
+            if (response.data === null) {
+              this.searchResults = [];
+            } else {
+              this.searchResults = response.data;
+              console.log(this.searchResults)
+              console.log(response.data)
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            this.searchResults = []
+          })
+    },*/
   },
 }
 
