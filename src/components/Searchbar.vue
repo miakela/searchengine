@@ -14,6 +14,11 @@ export default {
   props: {
     value: String
   },
+  data() {
+    return {
+      sizes: ['Small', 'Medium', 'Large', 'Extra Large']
+    }
+  },
 
   methods:{
     onSubmit(event) {

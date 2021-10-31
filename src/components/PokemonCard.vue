@@ -1,37 +1,58 @@
 <template>
-  <div class="w-100 p-3 mb-1 text-light card">
-    <b-container fluid="lg">
-      <b-card-group deck class="deck">
         <b-card id="cards"
-                style="max-width: 20rem"
-                img-src="https://www.pokewiki.de/images/thumb/9/96/Sugimori_001.png/250px-Sugimori_001.png"
-                img-alt="Pokemonname"
+                style="max-width: 20rem; display:inline-block"
+                img-alt="PokemonImage"
                 img-top
+                :img-src=resolveImgSource(number)
                 header-tag="header"
                 footer-tag="footer"
                 value>
+<!--          <b-card-img v-on:change="resolveImgSource(number)" v-bind:img-src=resolveImgSource(number)></b-card-img>-->
           <b-card-body class="card-body">
-            <b-card-title>{{ name }}</b-card-title>
-            <b-card-sub-title class="mb-2">No.000 {{ number }}</b-card-sub-title>
+            <b-card-title class="title">{{ value.name }}</b-card-title>
+            <b-card-sub-title v-on:change="getNumber(number)" class="mb-2">№ {{getNumber(number)}}</b-card-sub-title>
           </b-card-body>
-          <b-card-footer>Type: <b-badge class="Grass">{{ type }}</b-badge></b-card-footer>
+          <b-card-footer>Type: <b-badge :class="value.type_1" >{{value.type_1}}</b-badge>  <b-badge v-if="value.type_2" :class="value.type_2" >{{value.type_2}}</b-badge></b-card-footer>
         </b-card>
-      </b-card-group>
-    </b-container>
-  </div>
 </template>
 
 <script>
 export default {
   name: "PokemonCard",
   props: {
-    content: undefined,
-    name: String,
+    value: Object,
     number: Number,
-    type_1: String,
-    type_2: String,
-    searchResults: [],
+    pokedexNumb: String,
+    searchResultsAll: [],
   },
+
+
+ methods: {
+ getNumber: function(pokedexNum) {
+    if (this.number < 10) {
+      pokedexNum = "00" + this.number
+    } else if (this.number < 100) {
+      pokedexNum = "0" + this.number
+    } else {
+      pokedexNum = "" + this.number + ""
+    }
+    return pokedexNum
+  },
+   resolveImgSource: function (pokedexNum) {
+     let imgurl;
+     /*this.searchResults.pokedex_number*/
+     if ((pokedexNum) < 10) {
+       imgurl = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/00" + pokedexNum + ".png"
+     } else if ((pokedexNum) < 100) {
+       imgurl = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/0" + pokedexNum + ".png"
+     } else if ((pokedexNum) < 1000) {
+       imgurl = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/" + pokedexNum + ".png"
+     } else {
+       imgurl = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png"
+     }
+     return imgurl
+   },
+ }
 }
 </script>
 
@@ -70,6 +91,9 @@ export default {
   border-radius: 0.2rem !important;
   margin-left: 15px;
   margin-bottom: 15px;
+}
+.title{
+  margin-bottom: 1px!important;
 }
 
 </style>

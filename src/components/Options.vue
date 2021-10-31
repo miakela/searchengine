@@ -1,10 +1,8 @@
 <template>
   <div>
-    <div>json: {{ jason }}</div>
     <template>
       <div class="accordion w-50 p-3 mb-1 mx-auto" role="tablist">
         <b-card no-body class="mb-1">
-
           <b-card-header header-tag="header" class="p-1" role="tab">
             <b-button block v-b-toggle.accordion-1 style="background-color: #29292F">Advanced Search
               <b-icon icon="chevron-bar-down"></b-icon>
@@ -186,14 +184,14 @@
                     <div>
                       <b-form-checkbox-group
                           v-model="selectedHeight"
-                          :options="height"
                           buttons
                           button-variant="dark"
                           size="lg"
                           name="buttons-2"
-                          value-field="item"
-                          text-field="name"
-                      ></b-form-checkbox-group>
+                      ><b-form-checkbox v-model="selectedHeight" value=1 unchecked-value=null >small</b-form-checkbox>
+                        <b-form-checkbox v-model="selectedHeight" value=2 unchecked-value=null >medium</b-form-checkbox>
+                        <b-form-checkbox v-model="selectedHeight" value=3 unchecked-value=null >large</b-form-checkbox>
+                      </b-form-checkbox-group>
                     </div>
                   </b-form-group>
 
@@ -202,16 +200,33 @@
                     <div>
                       <b-form-checkbox-group
                           v-model="selectedWeight"
-                          :options="weight"
                           buttons
                           button-variant="dark"
                           size="lg"
                           name="buttons-2"
-                          value-field="item"
-                          text-field="name"
-                      ></b-form-checkbox-group>
+                      ><b-form-checkbox v-model="selectedWeight" value=1 unchecked-value=null >light</b-form-checkbox>
+                        <b-form-checkbox v-model="selectedWeight" value=2 unchecked-value=null >medium</b-form-checkbox>
+                        <b-form-checkbox v-model="selectedWeight" value=3 unchecked-value=null >heavy</b-form-checkbox>
+                      </b-form-checkbox-group>
                     </div>
                   </b-form-group>
+
+                  <b-card-group>
+                    <b-card-title align="left" class="title">Sorty By</b-card-title>
+                    <b-form-select v-model="sort" :options="sortBy"
+                                   style="background-color: #29292F; color:white "></b-form-select>
+                    <div class="idek">
+                    <div class="form-check form-check-inline">
+                      <input v-model="ordered" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="ASC">
+                      <label class="form-check-label" for="inlineRadio1">Ascending ↑</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input v-model="ordered" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="DESC">
+                      <label class="form-check-label" for="inlineRadio2">Descending ↓</label>
+                    </div>
+                    </div>
+                  </b-card-group>
+
                   <b-form-group>
                   <b-button-group class="searchButton">
                     <b-button v-on:click="onClick">Search
@@ -219,6 +234,7 @@
                     </b-button>
                   </b-button-group>
                     </b-form-group>
+
                 </div>
               </b-card-group>
             </b-card-group>
@@ -232,14 +248,24 @@
 
 <script>
 export default {
-  name: "Options",
-
   data() {
     return {
-    jason: {},
-
+      jason: {},
+      sort: null,
+      ordered: null,
+      selectedType: [],
+      selectedWeakness: [],
+      selectedAbility: null,
       selectedHeight: null,
       selectedWeight: null,
+      sortBy: [
+        {value: "ability", text: "Ability"},
+        {value: "height_m", text: "Height"},
+        {value: "pokedex_number", text: "Number"},
+        {value: "type_1", text: 'Type'},
+        {value: "weakness", text: "Weaknesses"},
+        {value: "weight_kg", text: "Weight"},
+      ],
       height: [
         {item: 1, name: 'small'},
         {item: 2, name: 'medium'},
@@ -248,227 +274,226 @@ export default {
       weight: [
         {item: 1, name: 'light'},
         {item: 2, name: 'medium'},
-        {item: 3, name: 'heavy',},
+        {item: 3, name: 'heavy'},
       ],
-      selectedType: [],
-      selectedWeakness: [],
-      selectedAbility: null,
-      Abilities: [
-        "Adaptability",
-        "Aerilate",
-        "Aftermath",
-        "Air Lock",
-        "Anticipation",
-        "As One",
-        "Aura Break",
-        "Bad Dreams",
-        "Ball Fetch",
-        "Battery",
-        "Battle Armor",
-        "Battle Bond",
-        "Beast Boost",
-        "Berserk",
-        "Big Pecks",
-        "Blaze",
-        "Bulletproof",
-        "Cheek Pouch",
-        "Chilling Neigh",
-        "Chlorophyll",
-        "Clear Body",
-        "Color Change",
-        "Comatose",
-        "Competitive",
-        "Compound Eyes",
-        "Contrary",
-        "Corrosion",
-        "Cotton Down",
-        "Curious Medicine",
-        "Cursed Body",
-        "Cute Charm",
-        "Damp",
-        "Dancer",
-        "Dark Aura",
-        "Dauntless Shield",
-        "Dazzling",
-        "Defeatist",
-        "Defiant",
-        "Delta Stream",
-        "Desolate Land",
-        "Disguise",
-        "Download",
-        "Dragon‘s Maw",
-        "Drizzle",
-        "Drought",
-        "Dry Skin",
-        "Early Bird",
-        "Effect Spore",
-        "Electric Surge",
-        "Emergency Exit",
-        "Fairy Aura",
-        "Filter",
-        "Flame Body",
-        "Flash Fire",
-        "Flower Gift",
-        "Flower Veil",
-        "Fluffy",
-        "Forecast",
-        "Forewarn",
-        "Frisk",
-        "Full Metal Body",
-        "Fur Coat",
-        "Gluttony",
-        "Gorilla Tactics",
-        "Grassy Surge",
-        "Grim Neigh",
-        "Gulp Missile",
-        "Guts",
-        "Healer",
-        "Honey Gather",
-        "Huge Power",
-        "Hunger Switch",
-        "Hustle",
-        "Hydration",
-        "Hyper Cutter",
-        "Ice Body",
-        "Ice Face",
-        "Illuminate",
-        "Illusion",
-        "Immunity",
-        "Innards Out",
-        "Inner Focus",
-        "Insomnia",
-        "Intimidate",
-        "Intrepid Sword",
-        "Iron Barbs",
-        "Iron Fist",
-        "Justified",
-        "Keen Eye",
-        "Leaf Guard",
-        "Levitate",
-        "Light Metal",
-        "Lightning Rod",
-        "Limber",
-        "Liquid Ooze",
-        "Magic Bounce",
-        "Magician",
-        "Magma Armor",
-        "Magnet Pull",
-        "Marvel Scale",
-        "Mega Launcher",
-        "Merciless",
-        "Mimicry",
-        "Minus",
-        "Misty Surge",
-        "Mold Breaker",
-        "Motor Drive",
-        "Multitype",
-        "Mummy",
-        "Natural Cure",
-        "Neuroforce",
-        "No Guard",
-        "Oblivious",
-        "Overcoat",
-        "Overgrow",
-        "Own Tempo",
-        "Parental Bond",
-        "Pickup",
-        "Pixilate",
-        "Plus",
-        "Poison Point",
-        "Poison Touch",
-        "Power Construct",
-        "Power Spot",
-        "Prankster",
-        "Pressure",
-        "Primordial Sea",
-        "Prism Armor",
-        "Psychic Surge",
-        "Punk Rock",
-        "Pure Power",
-        "Quick Draw",
-        "RKS System",
-        "Rattled",
-        "Receiver",
-        "Reckless",
-        "Refrigerate",
-        "Regenerator",
-        "Ripen",
-        "Rivalry",
-        "Rock Head",
-        "Rough Skin",
-        "Run Away",
-        "Sand Force",
-        "Sand Rush",
-        "Sand Spit",
-        "Sand Stream",
-        "Sand Veil",
-        "Sap Sipper",
-        "Schooling",
-        "Scrappy",
-        "Serene Grace",
-        "Shadow Shield",
-        "Shadow Tag",
-        "Shed Skin",
-        "Sheer Force",
-        "Shell Armor",
-        "Shield Dust",
-        "Shields Down",
-        "Simple",
-        "Skill Link",
-        "Slow Start",
-        "Sniper",
-        "Snow Cloak",
-        "Snow Warning",
-        "Solar Power",
-        "Solid Rock",
-        "Soul-Heart",
-        "Soundproof",
-        "Speed Boost",
-        "Stance Change",
-        "Static",
-        "Steadfast",
-        "Steam Engine",
-        "Steelworker",
-        "Stench",
-        "Sticky Hold",
-        "Strong Jaw",
-        "Sturdy",
-        "Suction Cups",
-        "Surge Surfer",
-        "Swarm",
-        "Sweet Veil",
-        "Swift Swim",
-        "Synchronize",
-        "Tangled Feet",
-        "Technician",
-        "Telepathy",
-        "Teravolt",
-        "Thick Fat",
-        "Torrent",
-        "Tough Claws",
-        "Trace",
-        "Transistor",
-        "Truant",
-        "Turboblaze",
-        "Unaware",
-        "Unnerve",
-        "Unseen Fist",
-        "Victory Star",
-        "Vital Spirit",
-        "Volt Absorb",
-        "Wandering Spirit",
-        "Water Absorb",
-        "Water Bubble",
-        "Water Compaction",
-        "Water Veil",
-        "Weak Armor",
-        "White Smoke",
-        "Wimp Out",
-        "Wonder Guard",
-        "Wonder Skin"
-      ],
-    }
+        Abilities: [
+      "Adaptability",
+      "Aerilate",
+      "Aftermath",
+      "Air Lock",
+      "Anticipation",
+      "As One",
+      "Aura Break",
+      "Bad Dreams",
+      "Ball Fetch",
+      "Battery",
+      "Battle Armor",
+      "Battle Bond",
+      "Beast Boost",
+      "Berserk",
+      "Big Pecks",
+      "Blaze",
+      "Bulletproof",
+      "Cheek Pouch",
+      "Chilling Neigh",
+      "Chlorophyll",
+      "Clear Body",
+      "Color Change",
+      "Comatose",
+      "Competitive",
+      "Compound Eyes",
+      "Contrary",
+      "Corrosion",
+      "Cotton Down",
+      "Curious Medicine",
+      "Cursed Body",
+      "Cute Charm",
+      "Damp",
+      "Dancer",
+      "Dark Aura",
+      "Dauntless Shield",
+      "Dazzling",
+      "Defeatist",
+      "Defiant",
+      "Delta Stream",
+      "Desolate Land",
+      "Disguise",
+      "Download",
+      "Dragon‘s Maw",
+      "Drizzle",
+      "Drought",
+      "Dry Skin",
+      "Early Bird",
+      "Effect Spore",
+      "Electric Surge",
+      "Emergency Exit",
+      "Fairy Aura",
+      "Filter",
+      "Flame Body",
+      "Flash Fire",
+      "Flower Gift",
+      "Flower Veil",
+      "Fluffy",
+      "Forecast",
+      "Forewarn",
+      "Frisk",
+      "Full Metal Body",
+      "Fur Coat",
+      "Gluttony",
+      "Gorilla Tactics",
+      "Grassy Surge",
+      "Grim Neigh",
+      "Gulp Missile",
+      "Guts",
+      "Healer",
+      "Honey Gather",
+      "Huge Power",
+      "Hunger Switch",
+      "Hustle",
+      "Hydration",
+      "Hyper Cutter",
+      "Ice Body",
+      "Ice Face",
+      "Illuminate",
+      "Illusion",
+      "Immunity",
+      "Innards Out",
+      "Inner Focus",
+      "Insomnia",
+      "Intimidate",
+      "Intrepid Sword",
+      "Iron Barbs",
+      "Iron Fist",
+      "Justified",
+      "Keen Eye",
+      "Leaf Guard",
+      "Levitate",
+      "Light Metal",
+      "Lightning Rod",
+      "Limber",
+      "Liquid Ooze",
+      "Magic Bounce",
+      "Magician",
+      "Magma Armor",
+      "Magnet Pull",
+      "Marvel Scale",
+      "Mega Launcher",
+      "Merciless",
+      "Mimicry",
+      "Minus",
+      "Misty Surge",
+      "Mold Breaker",
+      "Motor Drive",
+      "Multitype",
+      "Mummy",
+      "Natural Cure",
+      "Neuroforce",
+      "No Guard",
+      "Oblivious",
+      "Overcoat",
+      "Overgrow",
+      "Own Tempo",
+      "Parental Bond",
+      "Pickup",
+      "Pixilate",
+      "Plus",
+      "Poison Point",
+      "Poison Touch",
+      "Power Construct",
+      "Power Spot",
+      "Prankster",
+      "Pressure",
+      "Primordial Sea",
+      "Prism Armor",
+      "Psychic Surge",
+      "Punk Rock",
+      "Pure Power",
+      "Quick Draw",
+      "RKS System",
+      "Rattled",
+      "Receiver",
+      "Reckless",
+      "Refrigerate",
+      "Regenerator",
+      "Ripen",
+      "Rivalry",
+      "Rock Head",
+      "Rough Skin",
+      "Run Away",
+      "Sand Force",
+      "Sand Rush",
+      "Sand Spit",
+      "Sand Stream",
+      "Sand Veil",
+      "Sap Sipper",
+      "Schooling",
+      "Scrappy",
+      "Serene Grace",
+      "Shadow Shield",
+      "Shadow Tag",
+      "Shed Skin",
+      "Sheer Force",
+      "Shell Armor",
+      "Shield Dust",
+      "Shields Down",
+      "Simple",
+      "Skill Link",
+      "Slow Start",
+      "Sniper",
+      "Snow Cloak",
+      "Snow Warning",
+      "Solar Power",
+      "Solid Rock",
+      "Soul-Heart",
+      "Soundproof",
+      "Speed Boost",
+      "Stance Change",
+      "Static",
+      "Steadfast",
+      "Steam Engine",
+      "Steelworker",
+      "Stench",
+      "Sticky Hold",
+      "Strong Jaw",
+      "Sturdy",
+      "Suction Cups",
+      "Surge Surfer",
+      "Swarm",
+      "Sweet Veil",
+      "Swift Swim",
+      "Synchronize",
+      "Tangled Feet",
+      "Technician",
+      "Telepathy",
+      "Teravolt",
+      "Thick Fat",
+      "Torrent",
+      "Tough Claws",
+      "Trace",
+      "Transistor",
+      "Truant",
+      "Turboblaze",
+      "Unaware",
+      "Unnerve",
+      "Unseen Fist",
+      "Victory Star",
+      "Vital Spirit",
+      "Volt Absorb",
+      "Wandering Spirit",
+      "Water Absorb",
+      "Water Bubble",
+      "Water Compaction",
+      "Water Veil",
+      "Weak Armor",
+      "White Smoke",
+      "Wimp Out",
+      "Wonder Guard",
+      "Wonder Skin"
+    ],
+  }
   },
+
+  name: "Options",
   methods: {
     onClick(event) {
       event.preventDefault();
@@ -487,6 +512,12 @@ export default {
       if (this.selectedHeight!= null) {
         this.jason['height'] = this.selectedHeight;
       }
+      if (this.sort != null) {
+        let sortArr = [null, null];
+        sortArr[0] = this.sort;
+        sortArr[1] = this.ordered;
+        this.jason['sort'] = sortArr;
+      }
       this.$emit('submit', this.jason);
     },
   }
@@ -495,6 +526,12 @@ export default {
 </script>
 
 <style>
+.idek {
+  font-size: 12px;
+  padding-top: 6px;
+  padding-left: 6px;
+}
+
 .navbar {
   background-color: #29292F !important;
   border-radius: 8px;
@@ -541,6 +578,9 @@ export default {
   background-color: #29292F;
   border: 0 #29292F !important;
 }
+.custom-select {
+  margin-right: 20px !important;
+}
 
 .collapse.show {
   background-color: #29292F;
@@ -566,16 +606,16 @@ export default {
 }
 
 .title {
-  margin: 8px 0 28px !important;
+  margin: 28px 8px 8px 0 !important;
 }
 
 .marginType {
-  margin-left: 40px;
+  margin-left: 30px;
   margin-bottom: 40px;
 }
 
 .marginleft {
-  margin-left: 40px;
+  margin-left: 30px;
 }
 
 .dropdown-menu {
@@ -587,9 +627,6 @@ export default {
   margin-left: 200px !important;
 }
 
-.custom-select {
-  padding: 0.375rem 160px 0.375rem 0.75rem !important;
-}
 
 .searchButton {
   margin-top: 130px !important;

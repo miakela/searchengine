@@ -6,6 +6,11 @@
       <div class="card-big w-50 p-3 mb-1 mx-auto">
         <b-card-group columns>
           <!-- img -->
+          <div class="close">
+            <b-button size="sm" class="mb-2  close" onclick="this.searchResults.length = 0" >
+              <b-icon icon="x-circle" aria-hidden="true" href="http://localhost:8080/"></b-icon>
+            </b-button>
+          </div>
           <b-card no-body class="overflow-hidden" style="width:75%">
             <b-row no-gutters id="pokeimg">
               <b-card-img :src="imgsrc" class="img"/>
@@ -156,7 +161,16 @@ export default {
 h4 {
   margin-bottom: 0 !important;
 }
-
+.close {
+  float: left !important;
+  color: white !important ;
+  opacity: 1 !important;
+}
+.close:hover, .close:active {
+  float: left !important;
+  background-color: transparent !important;
+  opacity: 1 !important;
+}
 
 .col {
   margin-bottom: 0 !important;
