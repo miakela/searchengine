@@ -2,13 +2,12 @@
   <div id="app">
     <a href="http://localhost:8080/"><img id="logo" alt="Vue logo" src="./assets/logo.png"></a>
     <h1>Pokedex</h1>
-    <template>
-      <vue-bootstrap-typehead  :data="addresses" v-model="query" :serializer="s => s.text"
-                              placeholder="Search for a Pokemon"    @hit="selectedAddress = $event" :minMatchingChars="1" />
-        <p>{{addresses}}</p>
-    </template>
+      <vue-typeahead-bootstrap class="searchbar w-50 mb-1 mx-auto" v-model="query" @keyup.enter="onSubmit()" :data=addresses @hit="selecteduser = onSubmit"
+
+                               placeholder="Search for a Pokemon" :minMatchingChars="1"/>
+
     <div class="options">
-      <SearchBar v-model="searchQuery" @submit="onSubmit"/>
+<!--      <SearchBar v-model="searchQuery" @submit="onSubmit"/>-->
       <Options v-model="jason" @submit="onClick" />
     </div>
 
@@ -25,11 +24,13 @@
 </template>
 
 <script>
+/*
 import SearchBar from './components/Searchbar.vue';
+*/
 import PokemonCard from "@/components/PokemonCard";
 import Pokemon from "@/components/Pokemon";
 import Options from "@/components/Options";
-import VueBootstrapTypehead from 'vue-bootstrap-typeahead'
+import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 import _ from 'underscore'
 import axios from 'axios';
 
@@ -39,11 +40,13 @@ export default {
   name: 'App',
 
   components: {
+/*
     SearchBar: SearchBar,
+*/
     Pokemon: Pokemon,
     PokemonCard: PokemonCard,
     Options: Options,
-    VueBootstrapTypehead,
+    VueTypeaheadBootstrap,
   },
 
   data() {
@@ -107,14 +110,14 @@ export default {
   methods: {
     onSubmit() {
       let url;
-      if (isNaN(this.searchQuery)) {
+      if (isNaN(this.query)) {
         url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchName/'
-      } else if (this.searchQuery === '') {
+      } else if (this.query === '') {
         url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchAll/'
       } else {
         url = 'http://ec2-34-197-223-156.compute-1.amazonaws.com:8080/api/pokemon/searchID/'
       }
-      axios.get(url + this.searchQuery)
+      axios.get(url + this.query)
           .then((response) => {
             if (response.data === null) {
               this.searchResults = [];
@@ -129,6 +132,8 @@ export default {
             this.searchResults = []
           })
     },
+
+
     onClick(jason) {
       // Send filter to backend
       axios({
@@ -205,4 +210,9 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 
+.searchbar, .form-control {
+  border-radius: 50px!important;
+  background-color: #29292F!important;
+  border-color: #29292F!important;
+}
 </style>

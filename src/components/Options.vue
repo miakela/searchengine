@@ -170,6 +170,7 @@
                   </b-card-group>
                 </div>
               </b-card-group>
+
               <!--              right column Ability-->
               <b-card-group class="marginleft">
                 <div>
@@ -227,13 +228,22 @@
                     </div>
                   </b-card-group>
 
-                  <b-form-group>
-                  <b-button-group class="searchButton">
-                    <b-button v-on:click="onClick">Search
-                      <b-icon icon="search" size="sm" class="iconSearch"></b-icon>
-                    </b-button>
-                  </b-button-group>
-                    </b-form-group>
+                  <b-card-group>
+                    <b-card-body>
+                  <div class="form-check form-check-inline">
+                    <b-checkbox v-model="legendary" class="form-check-input" name="legendaryOption" value=1 unchecked-value=0 />
+                    <label class="form-check-label">Legendary Pokemon</label>
+                  </div>
+                    </b-card-body>
+                  </b-card-group>
+
+                  <b-form-group class="iconSearch">
+                      <b-button v-on:click="reset">Reset
+                      </b-button>
+                      <b-button v-on:click="onClick">Search
+                        <b-icon icon="search" size="sm" ></b-icon>
+                      </b-button>
+                  </b-form-group>
 
                 </div>
               </b-card-group>
@@ -251,6 +261,7 @@ export default {
   data() {
     return {
       jason: {},
+      legendary: null,
       sort: null,
       ordered: null,
       selectedType: [],
@@ -512,6 +523,9 @@ export default {
       if (this.selectedHeight!= null) {
         this.jason['height'] = this.selectedHeight;
       }
+      if (this.legendary != null ){
+        this.jason['legendary'] = this.legendary;
+      }
       if (this.sort != null) {
         let sortArr = [null, null];
         sortArr[0] = this.sort;
@@ -520,6 +534,16 @@ export default {
       }
       this.$emit('submit', this.jason);
     },
+    reset(){
+      this.sort = null;
+      this.ordered = null;
+      this.selectedType = [];
+      this.selectedWeakness = [];
+      this.selectedAbility = null;
+      this.selectedHeight = null;
+      this.selectedWeight = null;
+      this.legendary = null;
+    }
   }
 }
 
@@ -629,12 +653,17 @@ export default {
 
 
 .searchButton {
-  margin-top: 130px !important;
-  margin-left: 280px !important;
+  alignment: right !important;
+  margin-top: 10px !important;
+  margin-left: 80px !important;
 }
 
 .iconSearch {
-  margin-left: 16px;
+  margin-top: 40px ;
+  margin-left: 150px;
+}
+.btn.btn-secondary {
+  margin-left: 3px!important;
 }
 
 </style>
